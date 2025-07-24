@@ -1,0 +1,12 @@
+{
+	"recommendations": [
+		"amazonWebServices.aws-toolkit-vscode",
+		"bradlc.vscode-tailwindcss",
+		"biomejs.biome",
+		"ms-python.python",
+		"charliermarsh.ruff",
+		"golang.go",
+		"eamodio.gitlens",
+		"streetsidesoftware.code-spell-checker"
+	]
+}
