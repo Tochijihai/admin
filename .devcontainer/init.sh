@@ -163,5 +163,3 @@ fi
 
 chown -R tochijihai /commandhistory
 chown -R tochijihai:tochijihai /usr/local/share /home/tochijihai/.claude /workspaces/admin
-
-npm install -g @anthropic-ai/claude-code

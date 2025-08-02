@@ -1,5 +1,5 @@
 {
-	"name": "tochijihai-user-client",
+	"name": "tochijihai-admin-client",
 	"remoteUser": "tochijihai",
 	"build": {
 		"dockerfile": "Dockerfile",
@@ -31,7 +31,8 @@
 				"charliermarsh.ruff",
 				"golang.go",
 				"eamodio.gitlens",
-				"streetsidesoftware.code-spell-checker"
+				"streetsidesoftware.code-spell-checker",
+				"rooveterinaryinc.roo-cline"
 			],
 			"settings": {
 				"terminal.integrated.defaultProfile.linux": "zsh",
