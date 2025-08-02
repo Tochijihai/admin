@@ -86,6 +86,7 @@ done
 
 # Resolve and add other allowed domains (IPv4 only)
 for domain in \
+    "chakra-v3-docs.vercel.app" \
     "registry.npmjs.org" \
     "api.anthropic.com" \
     "sentry.io" \
@@ -163,3 +164,5 @@ fi
 
 chown -R tochijihai /commandhistory
 chown -R tochijihai:tochijihai /usr/local/share /home/tochijihai/.claude /workspaces/admin
+
+npm i -g @chakra-ui/cli
