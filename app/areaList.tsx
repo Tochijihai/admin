@@ -381,145 +381,145 @@ export function AreaList() {
             <Box p={6}>
               {/* 人口データの詳細情報を自作アコーディオンで表示 */}
               <VStack align="stretch" gap={3}>
-                  {/* 基本人口情報 */}
-                  <Box border="1px solid" borderColor="gray.200" borderRadius="md">
-                    <Flex
-                      as="button"
-                      w="100%"
-                      p={4}
-                      align="center"
-                      justify="space-between"
-                      bg={expandedSections.basic ? "blue.50" : "white"}
-                      _hover={{ bg: expandedSections.basic ? "blue.100" : "gray.50" }}
-                      transition="all 0.2s"
-                      onClick={() => toggleSection('basic')}
-                      borderRadius="md"
-                    >
-                      <Text fontWeight="medium" color="blue.700">📊 基本人口情報</Text>
-                      <Text fontSize="sm">{expandedSections.basic ? '▲' : '▼'}</Text>
-                    </Flex>
-                    {expandedSections.basic && (
-                      <VStack align="start" gap={2} p={4} >
-                        <Text color="gray.700">
-                          <Text as="span" fontWeight="medium">人口総数（日本人＋外国人）:</Text>{' '}
-                          <Text as="span" fontWeight="bold" color="blue.600">
-                            {selectedArea.populationData?.totalPopulation?.toLocaleString() || 'データなし'}人
-                          </Text>
+                {/* 基本人口情報 */}
+                <Box border="1px solid" borderColor="gray.200" borderRadius="md">
+                  <Flex
+                    as="button"
+                    w="100%"
+                    p={4}
+                    align="center"
+                    justify="space-between"
+                    bg={expandedSections.basic ? "blue.50" : "white"}
+                    _hover={{ bg: expandedSections.basic ? "blue.100" : "gray.50" }}
+                    transition="all 0.2s"
+                    onClick={() => toggleSection('basic')}
+                    borderRadius="md"
+                  >
+                    <Text fontWeight="medium" color="blue.700">📊 基本人口情報</Text>
+                    <Text fontSize="sm">{expandedSections.basic ? '▲' : '▼'}</Text>
+                  </Flex>
+                  {expandedSections.basic && (
+                    <VStack align="start" gap={2} p={4} >
+                      <Text color="gray.700">
+                        <Text as="span" fontWeight="medium">人口総数（日本人＋外国人）:</Text>{' '}
+                        <Text as="span" fontWeight="bold" color="blue.600">
+                          {selectedArea.populationData?.totalPopulation?.toLocaleString() || 'データなし'}人
                         </Text>
-                        <Text color="gray.700">
-                          <Text as="span" fontWeight="medium">前月からの増減:</Text>{' '}
-                          <Text as="span" fontWeight="bold" color={
-                            (selectedArea.populationData?.populationChangeFromLastMonth || 0) >= 0 ? "green.600" : "red.600"
-                          }>
-                            {(selectedArea.populationData?.populationChangeFromLastMonth || 0) >= 0 ? '+' : ''}
-                            {selectedArea.populationData?.populationChangeFromLastMonth?.toLocaleString() || 'データなし'}人
-                          </Text>
+                      </Text>
+                      <Text color="gray.700">
+                        <Text as="span" fontWeight="medium">前月からの増減:</Text>{' '}
+                        <Text as="span" fontWeight="bold" color={
+                          (selectedArea.populationData?.populationChangeFromLastMonth || 0) >= 0 ? "green.600" : "red.600"
+                        }>
+                          {(selectedArea.populationData?.populationChangeFromLastMonth || 0) >= 0 ? '+' : ''}
+                          {selectedArea.populationData?.populationChangeFromLastMonth?.toLocaleString() || 'データなし'}人
                         </Text>
-                      </VStack>
-                    )}
-                  </Box>
+                      </Text>
+                    </VStack>
+                  )}
+                </Box>
 
-                  {/* 人口内訳 */}
-                  <Box border="1px solid" borderColor="gray.200" borderRadius="md">
-                    <Flex
-                      as="button"
-                      w="100%"
-                      p={4}
-                      align="center"
-                      justify="space-between"
-                      bg={expandedSections.population ? "green.50" : "white"}
-                      _hover={{ bg: expandedSections.population ? "green.100" : "gray.50" }}
-                      transition="all 0.2s"
-                      onClick={() => toggleSection('population')}
-                      borderRadius="md"
-                    >
-                      <Text fontWeight="medium" color="green.700">👥 人口内訳</Text>
-                      <Text fontSize="sm">{expandedSections.population ? '▲' : '▼'}</Text>
-                    </Flex>
-                    {expandedSections.population && (
-                      <VStack align="start" gap={3} p={4} >
-                        {/* 日本人 */}
-                        <Box>
-                          <Text fontWeight="medium" color="blue.700" mb={2}>🇯🇵 日本人</Text>
-                          <VStack align="start" gap={1} pl={4}>
-                            <Text color="gray.700">
-                              総数: <Text as="span" fontWeight="bold">{selectedArea.populationData?.japaneseTotal?.toLocaleString() || 'データなし'}人</Text>
-                            </Text>
-                            <Text color="gray.700">
-                              男性: <Text as="span" fontWeight="bold">{selectedArea.populationData?.japaneseMale?.toLocaleString() || 'データなし'}人</Text>
-                            </Text>
-                            <Text color="gray.700">
-                              女性: <Text as="span" fontWeight="bold">{selectedArea.populationData?.japaneseFemale?.toLocaleString() || 'データなし'}人</Text>
-                            </Text>
-                          </VStack>
-                        </Box>
-                        
-                        {/* 外国人 */}
-                        <Box>
-                          <Text fontWeight="medium" color="green.700" mb={2}>🌏 外国人</Text>
-                          <VStack align="start" gap={1} pl={4}>
-                            <Text color="gray.700">
-                              総数: <Text as="span" fontWeight="bold">{selectedArea.populationData?.foreignerTotal?.toLocaleString() || 'データなし'}人</Text>
-                            </Text>
-                            <Text color="gray.700">
-                              男性: <Text as="span" fontWeight="bold">{selectedArea.populationData?.foreignerMale?.toLocaleString() || 'データなし'}人</Text>
-                            </Text>
-                            <Text color="gray.700">
-                              女性: <Text as="span" fontWeight="bold">{selectedArea.populationData?.foreignerFemale?.toLocaleString() || 'データなし'}人</Text>
-                            </Text>
-                          </VStack>
-                        </Box>
-                      </VStack>
-                    )}
-                  </Box>
+                {/* 人口内訳 */}
+                <Box border="1px solid" borderColor="gray.200" borderRadius="md">
+                  <Flex
+                    as="button"
+                    w="100%"
+                    p={4}
+                    align="center"
+                    justify="space-between"
+                    bg={expandedSections.population ? "green.50" : "white"}
+                    _hover={{ bg: expandedSections.population ? "green.100" : "gray.50" }}
+                    transition="all 0.2s"
+                    onClick={() => toggleSection('population')}
+                    borderRadius="md"
+                  >
+                    <Text fontWeight="medium" color="green.700">👥 人口内訳</Text>
+                    <Text fontSize="sm">{expandedSections.population ? '▲' : '▼'}</Text>
+                  </Flex>
+                  {expandedSections.population && (
+                    <VStack align="start" gap={3} p={4} >
+                      {/* 日本人 */}
+                      <Box>
+                        <Text fontWeight="medium" color="blue.700" mb={2}>🇯🇵 日本人</Text>
+                        <VStack align="start" gap={1} pl={4}>
+                          <Text color="gray.700">
+                            総数: <Text as="span" fontWeight="bold">{selectedArea.populationData?.japaneseTotal?.toLocaleString() || 'データなし'}人</Text>
+                          </Text>
+                          <Text color="gray.700">
+                            男性: <Text as="span" fontWeight="bold">{selectedArea.populationData?.japaneseMale?.toLocaleString() || 'データなし'}人</Text>
+                          </Text>
+                          <Text color="gray.700">
+                            女性: <Text as="span" fontWeight="bold">{selectedArea.populationData?.japaneseFemale?.toLocaleString() || 'データなし'}人</Text>
+                          </Text>
+                        </VStack>
+                      </Box>
+                      
+                      {/* 外国人 */}
+                      <Box>
+                        <Text fontWeight="medium" color="green.700" mb={2}>🌏 外国人</Text>
+                        <VStack align="start" gap={1} pl={4}>
+                          <Text color="gray.700">
+                            総数: <Text as="span" fontWeight="bold">{selectedArea.populationData?.foreignerTotal?.toLocaleString() || 'データなし'}人</Text>
+                          </Text>
+                          <Text color="gray.700">
+                            男性: <Text as="span" fontWeight="bold">{selectedArea.populationData?.foreignerMale?.toLocaleString() || 'データなし'}人</Text>
+                          </Text>
+                          <Text color="gray.700">
+                            女性: <Text as="span" fontWeight="bold">{selectedArea.populationData?.foreignerFemale?.toLocaleString() || 'データなし'}人</Text>
+                          </Text>
+                        </VStack>
+                      </Box>
+                    </VStack>
+                  )}
+                </Box>
 
-                  {/* 世帯情報 */}
-                  <Box border="1px solid" borderColor="gray.200" borderRadius="md">
-                    <Flex
-                      as="button"
-                      w="100%"
-                      p={4}
-                      align="center"
-                      justify="space-between"
-                      bg={expandedSections.household ? "purple.50" : "white"}
-                      _hover={{ bg: expandedSections.household ? "purple.100" : "gray.50" }}
-                      transition="all 0.2s"
-                      onClick={() => toggleSection('household')}
-                      borderRadius="md"
-                    >
-                      <Text fontWeight="medium" color="purple.700">🏠 世帯情報</Text>
-                      <Text fontSize="sm">{expandedSections.household ? '▲' : '▼'}</Text>
-                    </Flex>
-                    {expandedSections.household && (
-                      <VStack align="start" gap={2} p={4} >
-                        <Text color="gray.700">
-                          <Text as="span" fontWeight="medium">総世帯数:</Text>{' '}
-                          <Text as="span" fontWeight="bold" color="purple.600">
-                            {selectedArea.populationData?.householdTotal?.toLocaleString() || 'データなし'}世帯
-                          </Text>
+                {/* 世帯情報 */}
+                <Box border="1px solid" borderColor="gray.200" borderRadius="md">
+                  <Flex
+                    as="button"
+                    w="100%"
+                    p={4}
+                    align="center"
+                    justify="space-between"
+                    bg={expandedSections.household ? "purple.50" : "white"}
+                    _hover={{ bg: expandedSections.household ? "purple.100" : "gray.50" }}
+                    transition="all 0.2s"
+                    onClick={() => toggleSection('household')}
+                    borderRadius="md"
+                  >
+                    <Text fontWeight="medium" color="purple.700">🏠 世帯情報</Text>
+                    <Text fontSize="sm">{expandedSections.household ? '▲' : '▼'}</Text>
+                  </Flex>
+                  {expandedSections.household && (
+                    <VStack align="start" gap={2} p={4} >
+                      <Text color="gray.700">
+                        <Text as="span" fontWeight="medium">総世帯数:</Text>{' '}
+                        <Text as="span" fontWeight="bold" color="purple.600">
+                          {selectedArea.populationData?.householdTotal?.toLocaleString() || 'データなし'}世帯
                         </Text>
-                        <Text color="gray.700">
-                          <Text as="span" fontWeight="medium">日本人のみの世帯:</Text>{' '}
-                          <Text as="span" fontWeight="bold">
-                            {selectedArea.populationData?.householdJapaneseOnly?.toLocaleString() || 'データなし'}世帯
-                          </Text>
+                      </Text>
+                      <Text color="gray.700">
+                        <Text as="span" fontWeight="medium">日本人のみの世帯:</Text>{' '}
+                        <Text as="span" fontWeight="bold">
+                          {selectedArea.populationData?.householdJapaneseOnly?.toLocaleString() || 'データなし'}世帯
                         </Text>
-                        <Text color="gray.700">
-                          <Text as="span" fontWeight="medium">外国人のみの世帯:</Text>{' '}
-                          <Text as="span" fontWeight="bold">
-                            {selectedArea.populationData?.householdForeignerOnly?.toLocaleString() || 'データなし'}世帯
-                          </Text>
+                      </Text>
+                      <Text color="gray.700">
+                        <Text as="span" fontWeight="medium">外国人のみの世帯:</Text>{' '}
+                        <Text as="span" fontWeight="bold">
+                          {selectedArea.populationData?.householdForeignerOnly?.toLocaleString() || 'データなし'}世帯
                         </Text>
-                        <Text color="gray.700">
-                          <Text as="span" fontWeight="medium">複数国籍世帯:</Text>{' '}
-                          <Text as="span" fontWeight="bold">
-                            {selectedArea.populationData?.householdMixedNationality?.toLocaleString() || 'データなし'}世帯
-                          </Text>
+                      </Text>
+                      <Text color="gray.700">
+                        <Text as="span" fontWeight="medium">複数国籍世帯:</Text>{' '}
+                        <Text as="span" fontWeight="bold">
+                          {selectedArea.populationData?.householdMixedNationality?.toLocaleString() || 'データなし'}世帯
                         </Text>
-                      </VStack>
-                    )}
-                  </Box>
-                </VStack>
+                      </Text>
+                    </VStack>
+                  )}
+                </Box>
+              </VStack>
             </Box>
           </Box>
         )}

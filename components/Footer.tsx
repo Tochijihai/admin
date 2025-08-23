@@ -2,10 +2,7 @@
 
 import type { Meta } from "@/type";
 import { Box, Flex, Text } from "@chakra-ui/react";
-import { ArrowUpRight } from "lucide-react";
-import Image from "next/image";
 import { type ReactNode, useRef } from "react";
-import { GitHubIcon, NoteIcon, SlackIcon, XIcon } from "./icons/MediaIcons";
 import { Button } from "./ui/button";
 import {
   DialogActionTrigger,
@@ -18,7 +15,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
-import { Link } from "./ui/link";
 
 type Props = {
   meta: Meta;
@@ -57,7 +53,7 @@ const Dialog = ({ title, trigger, children }: { title: string; trigger: ReactNod
 export function Footer({ meta }: Props) {
   return (
     <Box as="footer" color="gray.800">
-      <Box
+      {/* <Box
         bg="url('/images/footer-bg.webp')"
         bgSize="cover"
         bgPos="center"
@@ -162,7 +158,7 @@ export function Footer({ meta }: Props) {
             </Flex>
           </Flex>
         </Flex>
-      </Box>
+      </Box> */}
       <Box bg="white" py={{ base: "6", lg: "4" }} px={{ base: "6", md: "12" }} textAlign="center">
         <Flex
           maxW="1024px"

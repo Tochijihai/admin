@@ -8,7 +8,7 @@ import {
   Text,
   VStack
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FiMap } from "react-icons/fi";
 import { TokyoArea } from "./areaList";
 
@@ -50,6 +50,8 @@ export function InteractiveMap({ areas, selectedArea, onAreaSelect }: Interactiv
   const [hoverInfo, setHoverInfo] = useState<HoverInfo | null>(null);
   /** 現在ホバー中の要素ID */
   const [hoveredPathId, setHoveredPathId] = useState<string | null>(null);
+
+  const ref = useRef<HTMLDivElement>(null!)
 
   /**
    * カテゴリに応じた色を取得（ポップアップ用）
@@ -168,6 +170,7 @@ export function InteractiveMap({ areas, selectedArea, onAreaSelect }: Interactiv
 
   return (
     <Box
+      ref={ref}
       position="relative"
       w="100%"
       h="600px"
@@ -276,29 +279,59 @@ export function InteractiveMap({ areas, selectedArea, onAreaSelect }: Interactiv
         </Flex>
       )}
 
-      {/* ホバー時のポップアップ */}
+      {/* ホバー時のポップアップ - 高いz-indexで最前面に表示 */}
       {hoverInfo && (
         <Box
           position="absolute"
-          left={hoverInfo.x + 10}
-          top={hoverInfo.y - 10}
+          left={Math.min(hoverInfo.x + 10, window.innerWidth - 220)} // 画面右端を超えないよう調整
+          top={Math.max(hoverInfo.y - 10, 10)} // 画面上端を超えないよう調整
           bg="white"
-          p={3}
-          borderRadius="md"
-          boxShadow="lg"
+          p={4}
+          borderRadius="lg"
+          boxShadow="2xl"
           border="1px solid"
-          borderColor="gray.200"
+          borderColor="gray.300"
           zIndex={10}
-          minW="200px"
+          minW="220px"
+          maxW="300px"
+          pointerEvents="none" // ポップアップ自体のマウスイベントを無効化
         >
-          <VStack align="start" gap={2}>
+          <VStack align="start" gap={3}>
             <HStack>
-              <Badge colorScheme={getCategoryColorScheme(hoverInfo.area.category)}>
+              <Badge
+                colorScheme={getCategoryColorScheme(hoverInfo.area.category)}
+                variant="solid"
+                px={3}
+                py={1}
+                borderRadius="full"
+                fontSize="xs"
+                fontWeight="bold"
+              >
                 {hoverInfo.area.category}
               </Badge>
-              <Text fontWeight="bold">{hoverInfo.area.name}</Text>
+              <Text fontWeight="bold" fontSize="md" color="gray.800">
+                {hoverInfo.area.name}
+              </Text>
             </HStack>
+            {/* 追加情報があれば表示 */}
+            {hoverInfo.area.populationData && (
+              <Text fontSize="sm" color="gray.600">
+                人口: {hoverInfo.area.populationData.totalPopulation?.toLocaleString()}人
+              </Text>
+            )}
           </VStack>
+          
+          {/* ポップアップの矢印インジケーター */}
+          <Box
+            position="absolute"
+            left="-6px"
+            top="20px"
+            w={0}
+            h={0}
+            borderY="6px solid transparent"
+            borderRight="6px solid white"
+            filter="drop-shadow(-1px 0px 1px rgba(0,0,0,0.1))"
+          />
         </Box>
       )}
     </Box>

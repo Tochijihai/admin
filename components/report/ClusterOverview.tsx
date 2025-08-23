@@ -1,6 +1,7 @@
 import type { Cluster } from "@/type";
 import { Box, Heading, Link, Text } from "@chakra-ui/react";
 import { MessagesSquareIcon } from "lucide-react";
+import { FiArrowRight } from "react-icons/fi";
 
 type Props = {
   cluster: Cluster;
@@ -33,7 +34,29 @@ export function ClusterOverview({ cluster }: Props) {
           {cluster.value.toLocaleString()}件
         </Text>
       </Box>
-      <Text>{cluster.takeaway}</Text>
+      <Text mb={2}>{cluster.takeaway}</Text>
+      <Link
+        display="inline-flex"
+        alignItems="center"
+        gap={2}
+        px={6}
+        py={3}
+        bg="white"
+        color="blue.600"
+        borderRadius="full"
+        fontWeight="bold"
+        fontSize="sm"
+        _hover={{
+          bg: "blue.50",
+          transform: "translateY(-2px)",
+          boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+        }}
+        transition="all 0.3s"
+        boxShadow="0 2px 8px rgba(0,0,0,0.1)"
+      >
+        <Text>他国・地域の施策事例</Text>
+        <FiArrowRight />
+      </Link>
     </Box>
   );
 }

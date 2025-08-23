@@ -2,7 +2,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Reporter } from "@/components/reporter/Reporter";
 import { Meta } from "@/type";
-import { Box, Heading } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import type { Metadata } from "next";
 import { AreaList } from "./areaList";
 
@@ -44,30 +44,28 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
-  const meta: Meta = {
-    "reporter": "たけし",
-    "message": "私はAIではありません。",
-    "webLink": "/",
-    "privacyLink": "/",
-    "termsLink": undefined,
-    "brandColor": "#2577B1",
-    "isDefault": false
+  const metaResponse = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/api/meta`, {
+    next: { tags: ["meta"] },
+  });
+
+  if (metaResponse.status === 404) {
+    return <div>レポートが見つかりません</div>;
   }
-    return (
-      <>
-        <div className={"container"}>
-          <Header />
-          <Box mx={"auto"} maxW={"1024px"} mb={10}>
-            <Heading textAlign={"left"} fontSize={"xl"} mb={8}>
-              レポート一覧
-            </Heading>
-            <AreaList />
-            <Box mb="12">
-              <Reporter meta={meta} />
-            </Box>
+
+  const meta: Meta = await metaResponse.json();
+  
+  return (
+    <>
+      <div className={"container"}>
+        <Header />
+        <Box mx={"auto"} maxW={"1024px"} mb={10}>
+          <AreaList />
+          <Box mb="12">
+            <Reporter meta={meta} />
           </Box>
-        </div>
-        <Footer meta={meta}/>
-      </>
-    );
+        </Box>
+      </div>
+      <Footer meta={meta}/>
+    </>
+  );
 }
