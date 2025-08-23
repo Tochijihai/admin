@@ -1,4 +1,3 @@
-import { getRelativeUrl } from "@/app/utils/image-src";
 import {
   DialogBody,
   DialogCloseTrigger,
@@ -32,7 +31,7 @@ export function BroadlisteningGuide() {
             <b>「広く声を収集し、収集した声をAI技術で分析・可視化する手法」</b>
             です。
           </Text>
-          <Image mb={4} src={getRelativeUrl("/images/broadlistening.png")} alt={"ブロードリスニングのイメージ"} />
+          <Image mb={4} src={"/images/broadlistening.png"} alt={"ブロードリスニングのイメージ"} />
           <Text>
             かつてラジオやテレビなど放送技術の発展により、大勢の人に声を届けることが可能になりました。しかし大勢の声を聞くことはできませんでした。2023年ごろから、大規模言語モデルの技術の発展により、大勢の意見を要約し、わかりやすく可視化したりレポートにまとめたりすることが可能になりました。この「大勢の声を聞く技術」のことをブロードリスニングと言います。
           </Text>

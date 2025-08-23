@@ -14,8 +14,8 @@ type PageProps = {
   }>;
 };
 
-// ISR 5分おきにレポート更新確認
-export const revalidate = 300;
+// プリレンダリングを無効化してSSRに切り替え
+export const dynamic = 'force-dynamic';
 
 export default async function Page({ params }: PageProps) {
   const slug = (await params).slug;

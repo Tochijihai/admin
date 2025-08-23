@@ -5,7 +5,8 @@ import { Reporter } from "@/components/reporter/Reporter";
 import { Meta } from "@/type";
 import { Box } from "@chakra-ui/react";
 
-export const revalidate = 300;
+// プリレンダリングを無効化してSSRに切り替え
+export const dynamic = 'force-dynamic';
 
 export default async function Page() {
   const metaResponse = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/api/meta`, {
