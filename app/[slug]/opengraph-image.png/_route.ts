@@ -1,7 +1,4 @@
-import { generateStaticParams } from "@/app/[slug]/page";
 import { OpImage } from "../_op-image";
-
-export { generateStaticParams };
 
 type PageProps = {
   params: Promise<{
