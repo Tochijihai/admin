@@ -1,20 +1,23 @@
-import { NextRequest, NextResponse } from "next/server";
 import type { Result } from "@/type";
-import { readFile } from "fs/promises";
-import { join } from "path";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
   try {
     const { slug } = await params;
 
-    // slugに基づいて動的にJSONファイルを読み込む
-    const filePath = join(process.cwd(), "app", "api", "reports", "[slug]", "dummy", slug, "hierarchical_result.json");
-
     try {
-      const fileContent = await readFile(filePath, "utf-8");
-      const result = JSON.parse(fileContent) as Result;
+      // 完全URLを使用してpublicファイルにアクセス
+      const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+      const res = await fetch(`${baseUrl}/data/reports/${slug}/hierarchical_result.json`);
+      
+      if (!res.ok) {
+        throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+      }
+      
+      const result = await res.json() as Result;
       return NextResponse.json(result);
     } catch (fileError) {
+      console.warn(`Report file not found for slug: ${slug}`, fileError);
       // ファイルが見つからない場合は404を返す
       return NextResponse.json({ error: "Report not found" }, { status: 404 });
     }

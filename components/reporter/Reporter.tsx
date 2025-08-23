@@ -9,7 +9,7 @@ async function ReporterImage({
 }: {
   reporterName: string;
 }) {
-  return <Image src={imagePath} alt={reporterName} maxW="150px" />;
+  return <Image src={imagePath} alt={reporterName} maxW="100px" />;
 }
 
 export async function Reporter({ meta }: { meta: Meta }) {
