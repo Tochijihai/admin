@@ -58,13 +58,13 @@ export default async function Page() {
         <div className={"container"}>
           <Header />
           <Box mx={"auto"} maxW={"1024px"} mb={10}>
-            <Box mb="12">
-              <Reporter meta={meta} />
-            </Box>
             <Heading textAlign={"left"} fontSize={"xl"} mb={8}>
               レポート一覧
             </Heading>
             <AreaList />
+            <Box mb="12">
+              <Reporter meta={meta} />
+            </Box>
           </Box>
         </div>
         <Footer meta={meta}/>
