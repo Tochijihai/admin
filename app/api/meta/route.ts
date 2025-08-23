@@ -1,18 +1,18 @@
-import { NextRequest, NextResponse } from "next/server";
 import type { Meta } from "@/type";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
   try {
     // モックデータを返す
     const meta: Meta = {
-      reporter: "名前未設定ユーザー",
+      reporter: "yamamoto",
       message:
-        "レポーター情報が未設定です。レポート作成者がメタデータをセットアップすることでレポーター情報が表示されます。",
+        "チームリソース削除要確認",
       webLink: "/",
       privacyLink: "/",
       termsLink: undefined,
       brandColor: "#2577B1",
-      isDefault: true,
+      isDefault: false,
     };
 
     return NextResponse.json(meta);
