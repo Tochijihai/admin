@@ -311,25 +311,76 @@ export function AreaList() {
 
         {/* 選択済み市区町村の表示 */}
         {selectedArea && (
-          <Box 
-            p={6} 
-            bg="blue.50" 
-            borderRadius="md" 
-            border="1px solid" 
-            borderColor="blue.200"
-          > 
-            <Flex align="center">
-              <VStack align="stretch" gap={4}>
-                <Flex align="center" gap={4}>
-                  <Badge colorScheme={getCategoryColor(selectedArea.category)}>
-                    {selectedArea.category}
-                  </Badge>
-                  <Heading size="md">{selectedArea.name}</Heading>
-                  <Text color="gray.600">が選択されています</Text>
-                </Flex>
-                
-                {/* 人口データの詳細情報を自作アコーディオンで表示 */}
-                <VStack align="stretch" gap={2}>
+          <Box
+            p={0}
+            bg="white"
+            borderRadius="lg"
+            border="1px solid"
+            borderColor="gray.200"
+            boxShadow="lg"
+            overflow="hidden"
+          >
+            {/* ヘッダー部分 */}
+            <Box
+              bg="blue.500"
+              color="white"
+              p={6}
+              position="relative"
+              bgGradient="linear(to-r, blue.500, blue.600)"
+            >
+              <Flex justify="space-between" align="center">
+                <VStack align="start" gap={2}>
+                  <HStack gap={3}>
+                    <Badge
+                      colorScheme={getCategoryColor(selectedArea.category)}
+                      bg="white"
+                      color={`${getCategoryColor(selectedArea.category)}.600`}
+                      px={3}
+                      py={1}
+                      borderRadius="full"
+                      fontWeight="bold"
+                    >
+                      {selectedArea.category}
+                    </Badge>
+                    <Text fontSize="sm" color="blue.100">選択中</Text>
+                  </HStack>
+                  <Heading size="lg" color="white">
+                    {selectedArea.name}
+                  </Heading>
+                </VStack>
+
+                {/* 分析結果へのリンク */}
+                <NextLink href={`/${selectedArea.id}`} passHref legacyBehavior>
+                  <Link
+                    display="inline-flex"
+                    alignItems="center"
+                    gap={2}
+                    px={6}
+                    py={3}
+                    bg="white"
+                    color="blue.600"
+                    borderRadius="full"
+                    fontWeight="bold"
+                    fontSize="sm"
+                    _hover={{
+                      bg: "blue.50",
+                      transform: "translateY(-2px)",
+                      boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+                    }}
+                    transition="all 0.3s"
+                    boxShadow="0 2px 8px rgba(0,0,0,0.1)"
+                  >
+                    <Text>分析結果へ</Text>
+                    <FiArrowRight />
+                  </Link>
+                </NextLink>
+              </Flex>
+            </Box>
+
+            {/* コンテンツ部分 */}
+            <Box p={6}>
+              {/* 人口データの詳細情報を自作アコーディオンで表示 */}
+              <VStack align="stretch" gap={3}>
                   {/* 基本人口情報 */}
                   <Box border="1px solid" borderColor="gray.200" borderRadius="md">
                     <Flex
@@ -348,7 +399,7 @@ export function AreaList() {
                       <Text fontSize="sm">{expandedSections.basic ? '▲' : '▼'}</Text>
                     </Flex>
                     {expandedSections.basic && (
-                      <VStack align="start" gap={2} p={4} pt={0}>
+                      <VStack align="start" gap={2} p={4} >
                         <Text color="gray.700">
                           <Text as="span" fontWeight="medium">人口総数（日本人＋外国人）:</Text>{' '}
                           <Text as="span" fontWeight="bold" color="blue.600">
@@ -386,7 +437,7 @@ export function AreaList() {
                       <Text fontSize="sm">{expandedSections.population ? '▲' : '▼'}</Text>
                     </Flex>
                     {expandedSections.population && (
-                      <VStack align="start" gap={3} p={4} pt={0}>
+                      <VStack align="start" gap={3} p={4} >
                         {/* 日本人 */}
                         <Box>
                           <Text fontWeight="medium" color="blue.700" mb={2}>🇯🇵 日本人</Text>
@@ -440,7 +491,7 @@ export function AreaList() {
                       <Text fontSize="sm">{expandedSections.household ? '▲' : '▼'}</Text>
                     </Flex>
                     {expandedSections.household && (
-                      <VStack align="start" gap={2} p={4} pt={0}>
+                      <VStack align="start" gap={2} p={4} >
                         <Text color="gray.700">
                           <Text as="span" fontWeight="medium">総世帯数:</Text>{' '}
                           <Text as="span" fontWeight="bold" color="purple.600">
@@ -469,35 +520,7 @@ export function AreaList() {
                     )}
                   </Box>
                 </VStack>
-              </VStack>
-
-              {/* 分析結果へのリンク */}
-              <Box marginLeft="auto">
-                <NextLink href={`/${selectedArea.id}`} passHref legacyBehavior>
-                  <Link
-                    display="inline-flex"
-                    alignItems="center"
-                    gap={2}
-                    px={4}
-                    py={2}
-                    bg="blue.500"
-                    color="white"
-                    borderRadius="md"
-                    fontWeight="medium"
-                    _hover={{
-                      bg: "blue.600",
-                      textDecoration: "none",
-                      transform: "translateY(-1px)",
-                      boxShadow: "md",
-                    }}
-                    transition="all 0.2s"
-                  >
-                    <Text>分析結果へ</Text>
-                    <FiArrowRight />
-                  </Link>
-                </NextLink>
-              </Box>
-            </Flex>
+            </Box>
           </Box>
         )}
       </VStack>
